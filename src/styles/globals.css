@@ -1,0 +1,215 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  line-height: 1.55;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: var(--color-brand-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  text-decoration: none;
+  font-size: var(--font-size-secondary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--color-brand-hover);
+  color: var(--color-on-brand);
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-header__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.page-header__title {
+  font-size: var(--font-size-page-title);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.page-header__description {
+  margin-top: var(--space-2);
+  max-width: 42rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.status-badge--available {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.status-badge--development {
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+}
+
+.status-badge--coming-soon {
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+}
+
+.empty-state {
+  max-width: 40rem;
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state__title {
+  font-size: var(--font-size-section);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.empty-state__description {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-secondary);
+  line-height: 1.6;
+}
+
+.empty-state__title + .empty-state__description {
+  margin-top: var(--space-2);
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.entry-card {
+  display: block;
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.entry-card:hover {
+  border-color: var(--color-brand);
+  color: inherit;
+}
+
+.entry-card__title {
+  font-size: var(--font-size-section);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.entry-card__description {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-secondary);
+}
+
+.not-found {
+  max-width: 28rem;
+  padding-top: var(--space-8);
+}
+
+.not-found__title {
+  font-size: var(--font-size-page-title);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.not-found__description {
+  margin: var(--space-3) 0 var(--space-6);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .page-header__title,
+  .not-found__title {
+    font-size: 26px;
+  }
+
+  .entry-grid {
+    grid-template-columns: 1fr;
+  }
+}
