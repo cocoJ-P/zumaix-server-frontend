@@ -1,6 +1,7 @@
 import type { components } from './generated/schema';
 
 export type HealthResponse = components['schemas']['HealthResponse'];
+export type CurrentIdentityResponse = components['schemas']['MeResponse'];
 export type IngestRequest = components['schemas']['IngestRequest'];
 export type IngestResponse = components['schemas']['IngestResponse'];
 export type AnalyzeRequest = components['schemas']['AnalyzeRequest'];
