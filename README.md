@@ -11,10 +11,10 @@ Vite + React + TypeScript + React Router
 当前阶段：
 
 ```text
-D5.3.2 Service Frontend Discovery Feedback Workspace
+D6.3 Service Frontend Case Workspace
 ```
 
-已完成 App Shell、API Foundation、Intelligence Console、开发身份适配、用户提交只读工作区、面向当前企业的 Discovery Composer，以及发现反馈只读工作区。
+已完成 App Shell、API Foundation、Intelligence Console、开发身份适配、用户提交只读工作区、发现投放 Composer、发现反馈工作区，以及服务办理只读工作区。
 
 ## 运行
 
@@ -216,6 +216,9 @@ http://localhost:5173/submissions
 
 发现反馈
 = 从 Discovery 视角看用户后续行为
+
+服务办理
+= 查看已经进入企业服务办理的 ServiceCase
 ```
 
 ```text
@@ -322,13 +325,66 @@ refetch on window focus
 
 没有 WebSocket / Polling。
 
+## Service Case Workspace
+
+```text
+用户在解析成功后点击「继续办理」
+↓
+POST /api/user-submissions/{id}/service-case
+↓
+ServiceCase
+↓
+GET /api/service-cases
+↓
+Service Frontend /service-cases
+```
+
+入口：
+
+```text
+http://localhost:5173/service-cases
+```
+
+```text
+用户提交
+= UserSubmission Workspace
+
+发现反馈
+= Discovery → User response
+
+服务办理
+= ServiceCase Workspace
+```
+
+ServiceCase 由用户在解析成功后明确点击「继续办理」创建。服务方工作区当前只读，只能查看本企业事项与办理状态。
+
+```text
+ServiceCase.status
+≠ UserSubmission.status
+
+ServiceCase
+≠ Feishu Record
+```
+
+未来飞书只是执行载体。D6.3 不请求 `GET /api/service-cases/mine`，也不提供状态变更。
+
+刷新方式：
+
+```text
+manual refresh
++
+refetch on window focus
+```
+
+没有 WebSocket / Polling。
+
 ## 当前状态
 
-- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter、用户提交工作区、发现投放 Composer、发现反馈 Workspace
-- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池、Notification / Push、Analytics、Matching Learning
+- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter、用户提交工作区、发现投放 Composer、发现反馈 Workspace、服务办理 Workspace
+- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池、Notification / Push、Analytics、Matching Learning、飞书同步、ServiceCase 状态变更
 
 下一阶段：
 
 ```text
-D5.4｜E2E Feedback Acceptance
+D6.4｜Feishu Adapter Foundation
 ```

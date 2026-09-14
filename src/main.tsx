@@ -7,6 +7,7 @@ import './styles/intelligence.css';
 import './styles/submissions.css';
 import './styles/discoveries.css';
 import './styles/discovery-feedback.css';
+import './styles/service-cases.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -67,3 +67,13 @@ export type DiscoveryDisposition =
   components['schemas']['DiscoveryDisposition'];
 export type SubmissionOriginType =
   components['schemas']['SubmissionOriginType'];
+export type ServiceCaseStatus = components['schemas']['ServiceCaseStatus'];
+export type ServiceCaseListResponse =
+  components['schemas']['ServiceCaseListResponse'];
+export type ServiceCaseListItem = components['schemas']['ServiceCaseListItem'];
+export type ServiceCaseDetail = components['schemas']['ServiceCaseDetail'];
+export type ServiceCaseActor = components['schemas']['ServiceCaseActor'];
+export type ServiceCaseListSubmissionRef =
+  components['schemas']['ServiceCaseListSubmissionRef'];
+export type ServiceCaseDetailSubmissionRef =
+  components['schemas']['ServiceCaseDetailSubmissionRef'];

@@ -315,6 +315,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/user-submissions/{submission_id}/service-case": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Service Case */
+        post: operations["create_service_case_api_user_submissions__submission_id__service_case_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/user-submissions/mine": {
         parameters: {
             query?: never;
@@ -341,6 +358,57 @@ export interface paths {
         };
         /** Get Submission */
         get: operations["get_submission_api_user_submissions__submission_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/service-cases": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Service Cases */
+        get: operations["list_service_cases_api_service_cases_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/service-cases/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List My Service Cases For Current User */
+        get: operations["list_my_service_cases_for_current_user_api_service_cases_mine_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/service-cases/{service_case_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Service Case */
+        get: operations["get_service_case_api_service_cases__service_case_id__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -630,6 +698,12 @@ export interface components {
             reason?: string | null;
             /** @default normal */
             priority: components["schemas"]["DiscoveryPriority"];
+        };
+        /** CreateServiceCaseResponse */
+        CreateServiceCaseResponse: {
+            /** Created */
+            created: boolean;
+            service_case: components["schemas"]["ServiceCaseRecord"];
         };
         /** CreateSourceDiscoveryRequest */
         CreateSourceDiscoveryRequest: {
@@ -1215,6 +1289,23 @@ export interface components {
             /** Error Message */
             error_message?: string | null;
         };
+        /** LinkedServiceCase */
+        LinkedServiceCase: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["ServiceCaseStatus"];
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+            /** Closed At */
+            closed_at: string | null;
+        };
         /**
          * MarketingLevel
          * @enum {string}
@@ -1525,6 +1616,154 @@ export interface components {
          * @enum {string}
          */
         RevenueStage: "no_revenue" | "early_revenue" | "stable_revenue" | "growth_revenue" | "unknown";
+        /** ServiceCaseActor */
+        ServiceCaseActor: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Display Name */
+            display_name: string;
+        };
+        /** ServiceCaseDetail */
+        ServiceCaseDetail: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Enterprise Id
+             * Format: uuid
+             */
+            enterprise_id: string;
+            /**
+             * Created By User Id
+             * Format: uuid
+             */
+            created_by_user_id: string;
+            /**
+             * Submission Id
+             * Format: uuid
+             */
+            submission_id: string;
+            /** Title */
+            title: string;
+            status: components["schemas"]["ServiceCaseStatus"];
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+            /** Closed At */
+            closed_at: string | null;
+            created_by_user: components["schemas"]["ServiceCaseActor"];
+            submission: components["schemas"]["ServiceCaseDetailSubmissionRef"];
+        };
+        /** ServiceCaseDetailSubmissionRef */
+        ServiceCaseDetailSubmissionRef: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            input_type: components["schemas"]["SubmissionInputType"];
+            /** Input Preview */
+            input_preview: string;
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Origin Discovery Id */
+            origin_discovery_id: string | null;
+            /** Created At */
+            created_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+        };
+        /** ServiceCaseListItem */
+        ServiceCaseListItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string;
+            status: components["schemas"]["ServiceCaseStatus"];
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+            /** Closed At */
+            closed_at: string | null;
+            created_by_user: components["schemas"]["ServiceCaseActor"];
+            submission: components["schemas"]["ServiceCaseListSubmissionRef"];
+        };
+        /** ServiceCaseListResponse */
+        ServiceCaseListResponse: {
+            /** Items */
+            items: components["schemas"]["ServiceCaseListItem"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+        };
+        /** ServiceCaseListSubmissionRef */
+        ServiceCaseListSubmissionRef: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Origin Discovery Id */
+            origin_discovery_id: string | null;
+            /** Created At */
+            created_at: string;
+        };
+        /** ServiceCaseRecord */
+        ServiceCaseRecord: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Enterprise Id
+             * Format: uuid
+             */
+            enterprise_id: string;
+            /**
+             * Created By User Id
+             * Format: uuid
+             */
+            created_by_user_id: string;
+            /**
+             * Submission Id
+             * Format: uuid
+             */
+            submission_id: string;
+            /** Title */
+            title: string;
+            status: components["schemas"]["ServiceCaseStatus"];
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+            /** Closed At */
+            closed_at: string | null;
+        };
+        /**
+         * ServiceCaseStatus
+         * @enum {string}
+         */
+        ServiceCaseStatus: "open" | "in_progress" | "completed" | "closed";
         /** SourceAssessment */
         SourceAssessment: {
             apparent_source_type: components["schemas"]["ApparentSourceType"];
@@ -1668,6 +1907,7 @@ export interface components {
             enterprise: components["schemas"]["MeEnterprise"];
             content?: components["schemas"]["SubmissionContentSummary"] | null;
             intelligence?: components["schemas"]["SubmissionIntelligenceSummary"] | null;
+            linked_service_case?: components["schemas"]["LinkedServiceCase"] | null;
         };
         /** UserSubmissionListResponse */
         UserSubmissionListResponse: {
@@ -1706,6 +1946,7 @@ export interface components {
             created_at: string | null;
             /** Completed At */
             completed_at: string | null;
+            linked_service_case?: components["schemas"]["LinkedServiceCase"] | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -2451,6 +2692,40 @@ export interface operations {
             };
         };
     };
+    create_service_case_api_user_submissions__submission_id__service_case_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateServiceCaseResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_my_submissions_api_user_submissions_mine_get: {
         parameters: {
             query?: {
@@ -2508,6 +2783,113 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UserSubmissionDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_service_cases_api_service_cases_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["ServiceCaseStatus"] | null;
+                user_id?: string | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCaseListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_my_service_cases_for_current_user_api_service_cases_mine_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["ServiceCaseStatus"] | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCaseListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_service_case_api_service_cases__service_case_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                service_case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceCaseDetail"];
                 };
             };
             /** @description Validation Error */

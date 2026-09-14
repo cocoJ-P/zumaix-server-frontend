@@ -1,0 +1,29 @@
+.service-case-status--open {
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.service-case-status--in_progress {
+  color: var(--color-on-brand);
+  background: var(--color-brand);
+}
+
+.service-case-status--completed {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.service-case-status--closed {
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+}
+
+.service-case-section {
+  margin-bottom: var(--space-5);
+}
+
+.service-case-section__title {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-secondary);
+  font-weight: 600;
+}

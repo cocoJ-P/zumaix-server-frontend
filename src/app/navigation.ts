@@ -1,6 +1,7 @@
 import {
   BriefcaseBusiness,
   Building2,
+  ClipboardList,
   FileText,
   History,
   Inbox,
@@ -68,6 +69,12 @@ export const navigation: NavigationSection[] = [
         label: '发现反馈',
         path: '/discovery-feedback',
         icon: MessageSquare,
+        status: 'available',
+      },
+      {
+        label: '服务办理',
+        path: '/service-cases',
+        icon: ClipboardList,
         status: 'available',
       },
       {

@@ -9,6 +9,7 @@ import { IntelligenceRunsPage } from '../pages/IntelligenceRunsPage';
 import { LeadsPage } from '../pages/LeadsPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { OpportunitiesPage } from '../pages/OpportunitiesPage';
+import { ServiceCasesPage } from '../pages/ServiceCasesPage';
 import { SourcesPage } from '../pages/SourcesPage';
 import { SubmissionsPage } from '../pages/SubmissionsPage';
 import { ToolsPage } from '../pages/ToolsPage';
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: 'submissions', element: <SubmissionsPage /> },
       { path: 'discoveries', element: <DiscoveriesPage /> },
       { path: 'discovery-feedback', element: <DiscoveryFeedbackPage /> },
+      { path: 'service-cases', element: <ServiceCasesPage /> },
       { path: 'sources', element: <SourcesPage /> },
       { path: 'intelligence-runs', element: <IntelligenceRunsPage /> },
       { path: 'opportunities', element: <OpportunitiesPage /> },
