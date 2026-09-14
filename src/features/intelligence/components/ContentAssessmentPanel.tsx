@@ -1,5 +1,6 @@
 import type { ContentIntelligenceResult } from '../../../api/types';
 import {
+  formatAnalysisWarning,
   formatConfidence,
   formatContentNature,
   formatOpportunityRelevance,
@@ -39,9 +40,18 @@ export function ContentAssessmentPanel({ result }: ContentAssessmentPanelProps) 
       {warnings.length > 0 ? (
         <div className="notice">
           <div>分析提示</div>
-          {warnings.map((warning) => (
-            <p key={warning}>{warning}</p>
-          ))}
+          {warnings.map((warning) => {
+            const label = formatAnalysisWarning(warning);
+
+            return (
+              <p key={warning}>
+                {label}
+                {label === '分析过程中存在需要注意的信息' ? (
+                  <span className="result-field__label"> {warning}</span>
+                ) : null}
+              </p>
+            );
+          })}
         </div>
       ) : null}
     </section>

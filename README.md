@@ -11,10 +11,10 @@ Vite + React + TypeScript + React Router
 当前阶段：
 
 ```text
-D0.1 Development Identity Adapter
+D4.1 Service Frontend Discovery Composer
 ```
 
-已完成 App Shell、API Foundation、Intelligence Console，以及开发身份适配。
+已完成 App Shell、API Foundation、Intelligence Console、开发身份适配、用户提交只读工作区，以及面向当前企业的 Discovery Composer。
 
 ## 运行
 
@@ -190,13 +190,98 @@ Opportunity Intelligence
 http://localhost:5173/intelligence
 ```
 
+## User Submission Workspace
+
+```text
+筑脉查查
+↓
+UserSubmission
+↓
+筑脉企服 Backend
+↓
+Service Frontend /submissions
+```
+
+入口：
+
+```text
+http://localhost:5173/submissions
+```
+
+当前 Workspace 只读，只看 Current Identity 对应的本企业提交，没有 Platform Staff、没有跨企业视图。
+
+```text
+UserSubmission
+≠ OpportunitySource
+≠ IntelligenceRun
+≠ Opportunity
+≠ Lead
+```
+
+刷新方式：
+
+```text
+manual refresh
++
+refetch on window focus
+```
+
+没有 WebSocket / Polling。
+
+## Discovery Composer
+
+```text
+Opportunity / Source / Manual
+↓
+POST /api/discoveries
+↓
+DiscoveryItem
+↓
+CurrentIdentity enterprise
+```
+
+入口：
+
+```text
+http://localhost:5173/discoveries
+```
+
+创建 Discovery 只表示 DiscoveryItem 已持久化，并会出现在当前企业的发现列表中。这不等于 Notification delivery，也不会推送微信、飞书或短信。
+
+当前范围：
+
+```text
+CurrentIdentity enterprise only
+No Platform Staff
+No cross-enterprise targeting
+```
+
+客户端不会发送 `enterprise_id` 或 `target_enterprise_id`。目标企业始终由 Backend 根据 CurrentIdentity 决定。
+
+OpenAPI 当前没有全局 `GET /api/opportunity-sources`。内容源选择器通过：
+
+```text
+GET /api/opportunities
+↓
+GET /api/opportunities/{opportunity_id}/sources
+```
+
+聚合已绑定机会的 Source。未绑定机会的 Source 本阶段无法列出。
+
+筑脉查查小程序目前尚未读取真实 Discovery。下一阶段 D4.2：
+
+```text
+GET /api/discoveries
+→ 筑脉查查「为你发现」
+```
+
 ## 当前状态
 
-- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter
-- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池
+- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter、用户提交工作区、发现投放 Composer
+- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池、小程序真实 Discovery、Notification / Push、User Feedback
 
 下一阶段：
 
 ```text
-D1｜Mini Program API Foundation
+D4.2｜Mini Program Discovery Feed Integration
 ```

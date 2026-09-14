@@ -76,6 +76,14 @@ const EVIDENCE_KIND_LABEL = {
   derived_signal: '规则信号',
 } as const;
 
+const ANALYSIS_WARNING_LABEL: Record<string, string> = {
+  insufficient_context: '信息不足，部分内容暂无法判断',
+  source_extraction_partial: '网页正文仅部分提取，分析结果可能不完整',
+  input_truncated: '内容较长，智能分析时仅使用了部分正文',
+  multiple_opportunities_detected:
+    '当前内容可能同时包含多个机会，本次仅分析主要机会',
+};
+
 const ERROR_MESSAGE: Record<string, string> = {
   NETWORK_ERROR: '无法连接筑脉企服 Backend',
   VALIDATION_ERROR: '链接格式不正确',
@@ -144,6 +152,20 @@ export function formatOpportunityType(value: string | null | undefined): string 
 
 export function formatClaimedStatus(value: string | null | undefined): string {
   return lookup(CLAIMED_STATUS_LABEL, value);
+}
+
+export function formatAnalysisWarning(value: string): string {
+  return ANALYSIS_WARNING_LABEL[value] ?? '分析过程中存在需要注意的信息';
+}
+
+export function mapBackendErrorCode(
+  code: string | null | undefined,
+): string | null {
+  if (!code) {
+    return null;
+  }
+
+  return ERROR_MESSAGE[code] ?? null;
 }
 
 export function formatEvidenceKind(value: string | null | undefined): string {

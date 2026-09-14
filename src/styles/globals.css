@@ -86,6 +86,10 @@ a:hover {
   gap: var(--space-3);
 }
 
+.page-header__actions {
+  margin-left: auto;
+}
+
 .page-header__title {
   font-size: var(--font-size-page-title);
   font-weight: 600;
@@ -122,9 +126,25 @@ a:hover {
   background: var(--color-warning-soft);
 }
 
-.status-badge--coming-soon {
+.status-badge--coming-soon,
+.status-badge--pending {
   color: var(--color-text-secondary);
   background: var(--color-surface-muted);
+}
+
+.status-badge--progress {
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.status-badge--success {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.status-badge--danger {
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
 }
 
 .empty-state {

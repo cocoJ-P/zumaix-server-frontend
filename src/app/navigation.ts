@@ -3,9 +3,11 @@ import {
   Building2,
   FileText,
   History,
+  Inbox,
   LayoutDashboard,
   ListTodo,
   Search,
+  Sparkles,
   Wrench,
   type LucideIcon,
 } from 'lucide-react';
@@ -47,6 +49,18 @@ export const navigation: NavigationSection[] = [
         label: '查一个机会',
         path: '/intelligence',
         icon: Search,
+        status: 'available',
+      },
+      {
+        label: '用户提交',
+        path: '/submissions',
+        icon: Inbox,
+        status: 'available',
+      },
+      {
+        label: '发现投放',
+        path: '/discoveries',
+        icon: Sparkles,
         status: 'available',
       },
       {

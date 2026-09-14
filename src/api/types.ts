@@ -16,3 +16,40 @@ export type SourceAssessment = components['schemas']['SourceAssessment'];
 export type IntelligenceEvidence = components['schemas']['IntelligenceEvidence'];
 export type ClaimedRequirement = components['schemas']['ClaimedRequirement'];
 export type NormalizedContent = components['schemas']['NormalizedContent'];
+export type UserSubmissionListResponse =
+  components['schemas']['UserSubmissionListResponse'];
+export type UserSubmissionSummary = components['schemas']['UserSubmissionSummary'];
+export type UserSubmissionDetail = components['schemas']['UserSubmissionDetail'];
+export type SubmissionRecord = components['schemas']['SubmissionRecord'];
+export type SubmissionContentSummary =
+  components['schemas']['SubmissionContentSummary'];
+export type SubmissionIntelligenceSummary =
+  components['schemas']['SubmissionIntelligenceSummary'];
+export type SubmissionStatus = components['schemas']['SubmissionStatus'];
+export type SubmissionFailureStage =
+  components['schemas']['SubmissionFailureStage'];
+export type SubmissionInputType = components['schemas']['SubmissionInputType'];
+export type CreateOpportunityDiscoveryRequest =
+  components['schemas']['CreateOpportunityDiscoveryRequest'];
+export type CreateSourceDiscoveryRequest =
+  components['schemas']['CreateSourceDiscoveryRequest'];
+export type CreateManualDiscoveryRequest =
+  components['schemas']['CreateManualDiscoveryRequest'];
+export type DiscoveryItemListResponse =
+  components['schemas']['DiscoveryItemListResponse'];
+export type DiscoveryItemSummary = components['schemas']['DiscoveryItemSummary'];
+export type DiscoveryItemDetail = components['schemas']['DiscoveryItemDetail'];
+export type DiscoveryPriority = components['schemas']['DiscoveryPriority'];
+export type DiscoveryStatus = components['schemas']['DiscoveryStatus'];
+export type DiscoveryReferenceType =
+  components['schemas']['DiscoveryReferenceType'];
+export type DiscoveryActor = components['schemas']['DiscoveryActor'];
+export type OpportunityListItem = components['schemas']['OpportunityListItem'];
+export type OpportunitySourceResponse =
+  components['schemas']['OpportunitySourceResponse'];
+export type OpportunityType = components['schemas']['OpportunityType'];
+
+export type CreateDiscoveryInput =
+  | CreateOpportunityDiscoveryRequest
+  | CreateSourceDiscoveryRequest
+  | CreateManualDiscoveryRequest;

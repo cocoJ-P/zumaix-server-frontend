@@ -280,6 +280,110 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/user-submissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Submissions */
+        get: operations["list_submissions_api_user_submissions_get"];
+        put?: never;
+        /** Create Submission */
+        post: operations["create_submission_api_user_submissions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user-submissions/{submission_id}/process": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Process Submission */
+        post: operations["process_submission_api_user_submissions__submission_id__process_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user-submissions/{submission_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Submission */
+        get: operations["get_submission_api_user_submissions__submission_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Discoveries */
+        get: operations["list_discoveries_api_discoveries_get"];
+        put?: never;
+        /** Create Discovery */
+        post: operations["create_discovery_api_discoveries_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/{discovery_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Discovery */
+        get: operations["get_discovery_api_discoveries__discovery_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/{discovery_id}/withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Withdraw Discovery */
+        post: operations["withdraw_discovery_api_discoveries__discovery_id__withdraw_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -367,6 +471,166 @@ export interface components {
          * @enum {string}
          */
         ContentNature: "opportunity_announcement" | "opportunity_interpretation" | "news_report" | "marketing_content" | "service_content" | "general_information" | "mixed" | "unknown";
+        /** CreateManualDiscoveryRequest */
+        CreateManualDiscoveryRequest: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            reference_type: "manual";
+            /** Title */
+            title: string;
+            /** Summary */
+            summary?: string | null;
+            /** Reason */
+            reason?: string | null;
+            /** @default normal */
+            priority: components["schemas"]["DiscoveryPriority"];
+        };
+        /** CreateOpportunityDiscoveryRequest */
+        CreateOpportunityDiscoveryRequest: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            reference_type: "opportunity";
+            /**
+             * Opportunity Id
+             * Format: uuid
+             */
+            opportunity_id: string;
+            /** Reason */
+            reason?: string | null;
+            /** @default normal */
+            priority: components["schemas"]["DiscoveryPriority"];
+        };
+        /** CreateSourceDiscoveryRequest */
+        CreateSourceDiscoveryRequest: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            reference_type: "source";
+            /**
+             * Source Id
+             * Format: uuid
+             */
+            source_id: string;
+            /** Reason */
+            reason?: string | null;
+            /** @default normal */
+            priority: components["schemas"]["DiscoveryPriority"];
+        };
+        /** CreateUserSubmissionRequest */
+        CreateUserSubmissionRequest: {
+            input_type: components["schemas"]["SubmissionInputType"];
+            /** Content */
+            content: string;
+        };
+        /** DiscoveryActor */
+        DiscoveryActor: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Display Name */
+            display_name: string;
+        };
+        /** DiscoveryItemDetail */
+        DiscoveryItemDetail: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["DiscoveryStatus"];
+            priority: components["schemas"]["DiscoveryPriority"];
+            reference_type: components["schemas"]["DiscoveryReferenceType"];
+            /** Opportunity Id */
+            opportunity_id: string | null;
+            /** Source Id */
+            source_id: string | null;
+            /** Title */
+            title: string;
+            /** Summary */
+            summary: string | null;
+            /** Reason */
+            reason: string | null;
+            opportunity_type: components["schemas"]["OpportunityType"] | null;
+            /** Issuer */
+            issuer: string | null;
+            /** Region */
+            region: string | null;
+            /** Deadline */
+            deadline: string | null;
+            /** Reference Url */
+            reference_url: string | null;
+            created_by: components["schemas"]["DiscoveryActor"] | null;
+            /** Created At */
+            created_at: string;
+            /** Updated At */
+            updated_at: string | null;
+            /** Withdrawn At */
+            withdrawn_at: string | null;
+        };
+        /** DiscoveryItemListResponse */
+        DiscoveryItemListResponse: {
+            /** Items */
+            items: components["schemas"]["DiscoveryItemSummary"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+        };
+        /** DiscoveryItemSummary */
+        DiscoveryItemSummary: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["DiscoveryStatus"];
+            priority: components["schemas"]["DiscoveryPriority"];
+            reference_type: components["schemas"]["DiscoveryReferenceType"];
+            /** Opportunity Id */
+            opportunity_id: string | null;
+            /** Source Id */
+            source_id: string | null;
+            /** Title */
+            title: string;
+            /** Summary */
+            summary: string | null;
+            /** Reason */
+            reason: string | null;
+            opportunity_type: components["schemas"]["OpportunityType"] | null;
+            /** Issuer */
+            issuer: string | null;
+            /** Region */
+            region: string | null;
+            /** Deadline */
+            deadline: string | null;
+            /** Reference Url */
+            reference_url: string | null;
+            created_by: components["schemas"]["DiscoveryActor"] | null;
+            /** Created At */
+            created_at: string;
+        };
+        /**
+         * DiscoveryPriority
+         * @enum {string}
+         */
+        DiscoveryPriority: "low" | "normal" | "high";
+        /**
+         * DiscoveryReferenceType
+         * @enum {string}
+         */
+        DiscoveryReferenceType: "opportunity" | "source" | "manual";
+        /**
+         * DiscoveryStatus
+         * @enum {string}
+         */
+        DiscoveryStatus: "active" | "withdrawn";
         /** EnterpriseCreate */
         EnterpriseCreate: {
             /** Name */
@@ -1009,11 +1273,154 @@ export interface components {
          * @enum {string}
          */
         SourceType: "official_document" | "official_news" | "official_wechat" | "media_article" | "wechat_article" | "service_provider" | "other" | "unknown";
+        /** SubmissionContentSummary */
+        SubmissionContentSummary: {
+            /** Title */
+            title: string | null;
+            /** Publisher */
+            publisher: string | null;
+            /** Resolved Url */
+            resolved_url: string | null;
+            /** Excerpt */
+            excerpt: string | null;
+            /** Fetch Status */
+            fetch_status: string | null;
+            /** Extraction Status */
+            extraction_status: string | null;
+            /** Warnings */
+            warnings?: string[];
+        };
+        /**
+         * SubmissionFailureStage
+         * @enum {string}
+         */
+        SubmissionFailureStage: "ingest" | "analyze";
+        /**
+         * SubmissionInputType
+         * @enum {string}
+         */
+        SubmissionInputType: "url" | "text";
+        /** SubmissionIntelligenceSummary */
+        SubmissionIntelligenceSummary: {
+            /**
+             * Run Id
+             * Format: uuid
+             */
+            run_id: string;
+            /** Status */
+            status: string;
+            result?: components["schemas"]["ContentIntelligenceResult"] | null;
+        };
+        /** SubmissionRecord */
+        SubmissionRecord: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            failure_stage: components["schemas"]["SubmissionFailureStage"] | null;
+            input_type: components["schemas"]["SubmissionInputType"];
+            /** Input Content */
+            input_content: string;
+            /** Input Preview */
+            input_preview: string;
+            /** Source Id */
+            source_id: string | null;
+            /** Ingestion Id */
+            ingestion_id: string | null;
+            /** Intelligence Run Id */
+            intelligence_run_id: string | null;
+            /** Error Code */
+            error_code: string | null;
+            /** Error Message */
+            error_message: string | null;
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+        };
+        /**
+         * SubmissionStatus
+         * @enum {string}
+         */
+        SubmissionStatus: "pending" | "ingesting" | "analyzing" | "succeeded" | "failed";
+        /** UserActor */
+        UserActor: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Display Name */
+            display_name: string;
+        };
         /**
          * UserStatus
          * @enum {string}
          */
         UserStatus: "active" | "disabled";
+        /** UserSubmissionCreateResponse */
+        UserSubmissionCreateResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            input_type: components["schemas"]["SubmissionInputType"];
+            /** Input Preview */
+            input_preview: string;
+            /** Created At */
+            created_at: string;
+            user: components["schemas"]["UserActor"];
+            enterprise: components["schemas"]["MeEnterprise"];
+        };
+        /** UserSubmissionDetail */
+        UserSubmissionDetail: {
+            submission: components["schemas"]["SubmissionRecord"];
+            submitted_by: components["schemas"]["MeUser"];
+            enterprise: components["schemas"]["MeEnterprise"];
+            content?: components["schemas"]["SubmissionContentSummary"] | null;
+            intelligence?: components["schemas"]["SubmissionIntelligenceSummary"] | null;
+        };
+        /** UserSubmissionListResponse */
+        UserSubmissionListResponse: {
+            /** Items */
+            items: components["schemas"]["UserSubmissionSummary"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+        };
+        /** UserSubmissionSummary */
+        UserSubmissionSummary: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            failure_stage: components["schemas"]["SubmissionFailureStage"] | null;
+            input_type: components["schemas"]["SubmissionInputType"];
+            /** Input Preview */
+            input_preview: string;
+            /** Display Title */
+            display_title: string;
+            submitted_by: components["schemas"]["UserActor"];
+            /** Source Id */
+            source_id: string | null;
+            /** Ingestion Id */
+            ingestion_id: string | null;
+            /** Intelligence Run Id */
+            intelligence_run_id: string | null;
+            /** Created At */
+            created_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -1639,6 +2046,286 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MeResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_submissions_api_user_submissions_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["SubmissionStatus"] | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserSubmissionListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_submission_api_user_submissions_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateUserSubmissionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserSubmissionCreateResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    process_submission_api_user_submissions__submission_id__process_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserSubmissionDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_submission_api_user_submissions__submission_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                submission_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserSubmissionDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_discoveries_api_discoveries_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["DiscoveryStatus"] | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryItemListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_discovery_api_discoveries_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateOpportunityDiscoveryRequest"] | components["schemas"]["CreateSourceDiscoveryRequest"] | components["schemas"]["CreateManualDiscoveryRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_discovery_api_discoveries__discovery_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    withdraw_discovery_api_discoveries__discovery_id__withdraw_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryItemDetail"];
                 };
             };
             /** @description Validation Error */
