@@ -6,6 +6,7 @@ import './styles/layout.css';
 import './styles/intelligence.css';
 import './styles/submissions.css';
 import './styles/discoveries.css';
+import './styles/discovery-feedback.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

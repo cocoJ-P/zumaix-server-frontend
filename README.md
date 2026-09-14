@@ -11,10 +11,10 @@ Vite + React + TypeScript + React Router
 当前阶段：
 
 ```text
-D4.1 Service Frontend Discovery Composer
+D5.3.2 Service Frontend Discovery Feedback Workspace
 ```
 
-已完成 App Shell、API Foundation、Intelligence Console、开发身份适配、用户提交只读工作区，以及面向当前企业的 Discovery Composer。
+已完成 App Shell、API Foundation、Intelligence Console、开发身份适配、用户提交只读工作区、面向当前企业的 Discovery Composer，以及发现反馈只读工作区。
 
 ## 运行
 
@@ -211,6 +211,14 @@ http://localhost:5173/submissions
 当前 Workspace 只读，只看 Current Identity 对应的本企业提交，没有 Platform Staff、没有跨企业视图。
 
 ```text
+用户提交
+= 查看完整 UserSubmission 工作项
+
+发现反馈
+= 从 Discovery 视角看用户后续行为
+```
+
+```text
 UserSubmission
 ≠ OpportunitySource
 ≠ IntelligenceRun
@@ -248,6 +256,11 @@ http://localhost:5173/discoveries
 
 创建 Discovery 只表示 DiscoveryItem 已持久化，并会出现在当前企业的发现列表中。这不等于 Notification delivery，也不会推送微信、飞书或短信。
 
+```text
+发现投放
+= create / withdraw Discovery
+```
+
 当前范围：
 
 ```text
@@ -268,20 +281,54 @@ GET /api/opportunities/{opportunity_id}/sources
 
 聚合已绑定机会的 Source。未绑定机会的 Source 本阶段无法列出。
 
-筑脉查查小程序目前尚未读取真实 Discovery。下一阶段 D4.2：
+## Discovery Feedback Workspace
 
 ```text
-GET /api/discoveries
-→ 筑脉查查「为你发现」
+筑脉查查用户反馈
+↓
+DiscoveryUserState + linked_submission
+↓
+GET /api/discovery-user-states
+↓
+Service Frontend /discovery-feedback
 ```
+
+入口：
+
+```text
+http://localhost:5173/discovery-feedback
+```
+
+```text
+发现投放
+= 服务方创建 / 撤回 Discovery
+
+发现反馈
+= 查看用户反馈与关联解析工作流
+
+用户提交
+= 完整 UserSubmission 工作区
+```
+
+当前只读，只看 CurrentIdentity 对应的本企业反馈。没有 Platform Staff、没有跨企业视图、没有代用户 Accept / 稍后。
+
+刷新方式：
+
+```text
+manual refresh
++
+refetch on window focus
+```
+
+没有 WebSocket / Polling。
 
 ## 当前状态
 
-- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter、用户提交工作区、发现投放 Composer
-- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池、小程序真实 Discovery、Notification / Push、User Feedback
+- 已完成：App Shell、API Foundation、查一个机会、Development Identity Adapter、用户提交工作区、发现投放 Composer、发现反馈 Workspace
+- 未完成：正式 Auth / OnePass、微信登录、企业切换、内容源工作台、分析记录 Inspector、机会库、企业工作台、匹配、线索、工具池、Notification / Push、Analytics、Matching Learning
 
 下一阶段：
 
 ```text
-D4.2｜Mini Program Discovery Feed Integration
+D5.4｜E2E Feedback Acceptance
 ```

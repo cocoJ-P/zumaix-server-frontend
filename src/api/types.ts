@@ -53,3 +53,17 @@ export type CreateDiscoveryInput =
   | CreateOpportunityDiscoveryRequest
   | CreateSourceDiscoveryRequest
   | CreateManualDiscoveryRequest;
+export type DiscoveryUserStateListResponse =
+  components['schemas']['DiscoveryUserStateListResponse'];
+export type DiscoveryUserStateListItem =
+  components['schemas']['DiscoveryUserStateListItem'];
+export type DiscoveryUserStateDiscoveryRef =
+  components['schemas']['DiscoveryUserStateDiscoveryRef'];
+export type DiscoveryUserStateUserRef =
+  components['schemas']['DiscoveryUserStateUserRef'];
+export type LinkedDiscoverySubmission =
+  components['schemas']['LinkedDiscoverySubmission'];
+export type DiscoveryDisposition =
+  components['schemas']['DiscoveryDisposition'];
+export type SubmissionOriginType =
+  components['schemas']['SubmissionOriginType'];

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './layout/AppLayout';
 import { DashboardPage } from '../pages/DashboardPage';
 import { DiscoveriesPage } from '../pages/DiscoveriesPage';
+import { DiscoveryFeedbackPage } from '../pages/DiscoveryFeedbackPage';
 import { EnterprisesPage } from '../pages/EnterprisesPage';
 import { IntelligencePage } from '../pages/IntelligencePage';
 import { IntelligenceRunsPage } from '../pages/IntelligenceRunsPage';
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: 'intelligence', element: <IntelligencePage /> },
       { path: 'submissions', element: <SubmissionsPage /> },
       { path: 'discoveries', element: <DiscoveriesPage /> },
+      { path: 'discovery-feedback', element: <DiscoveryFeedbackPage /> },
       { path: 'sources', element: <SourcesPage /> },
       { path: 'intelligence-runs', element: <IntelligenceRunsPage /> },
       { path: 'opportunities', element: <OpportunitiesPage /> },

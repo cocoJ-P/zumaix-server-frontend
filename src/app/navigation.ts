@@ -6,6 +6,7 @@ import {
   Inbox,
   LayoutDashboard,
   ListTodo,
+  MessageSquare,
   Search,
   Sparkles,
   Wrench,
@@ -61,6 +62,12 @@ export const navigation: NavigationSection[] = [
         label: '发现投放',
         path: '/discoveries',
         icon: Sparkles,
+        status: 'available',
+      },
+      {
+        label: '发现反馈',
+        path: '/discovery-feedback',
+        icon: MessageSquare,
         status: 'available',
       },
       {

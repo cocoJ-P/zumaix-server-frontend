@@ -315,6 +315,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/user-submissions/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List My Submissions */
+        get: operations["list_my_submissions_api_user_submissions_mine_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/user-submissions/{submission_id}": {
         parameters: {
             query?: never;
@@ -344,6 +361,40 @@ export interface paths {
         put?: never;
         /** Create Discovery */
         post: operations["create_discovery_api_discoveries_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/feed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Discovery Feed For Current User */
+        get: operations["list_discovery_feed_for_current_user_api_discoveries_feed_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/saved": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Saved Discoveries For Current User */
+        get: operations["list_saved_discoveries_for_current_user_api_discoveries_saved_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -384,10 +435,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/discoveries/{discovery_id}/seen": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Mark Discovery Seen For Current User */
+        post: operations["mark_discovery_seen_for_current_user_api_discoveries__discovery_id__seen_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/{discovery_id}/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept Discovery For Current User */
+        post: operations["accept_discovery_for_current_user_api_discoveries__discovery_id__accept_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/discoveries/{discovery_id}/user-state": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Discovery User State For Current User */
+        get: operations["get_discovery_user_state_for_current_user_api_discoveries__discovery_id__user_state_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Discovery User State For Current User */
+        patch: operations["update_discovery_user_state_for_current_user_api_discoveries__discovery_id__user_state_patch"];
+        trace?: never;
+    };
+    "/api/discovery-user-states": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Discovery User States */
+        get: operations["list_discovery_user_states_api_discovery_user_states_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AcceptDiscoveryResponse */
+        AcceptDiscoveryResponse: {
+            /** Created */
+            created: boolean;
+            user_state: components["schemas"]["DiscoveryUserStateResponse"];
+            submission: components["schemas"]["UserSubmissionCreateResponse"];
+        };
         /** AnalyzeRequest */
         AnalyzeRequest: {
             /** Ingestion Id */
@@ -537,6 +664,57 @@ export interface components {
             /** Display Name */
             display_name: string;
         };
+        /**
+         * DiscoveryDisposition
+         * @enum {string}
+         */
+        DiscoveryDisposition: "saved" | "deprioritized";
+        /** DiscoveryFeedItem */
+        DiscoveryFeedItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["DiscoveryStatus"];
+            priority: components["schemas"]["DiscoveryPriority"];
+            reference_type: components["schemas"]["DiscoveryReferenceType"];
+            /** Title */
+            title: string;
+            /** Summary */
+            summary: string | null;
+            /** Reason */
+            reason: string | null;
+            opportunity_type: components["schemas"]["OpportunityType"] | null;
+            /** Issuer */
+            issuer: string | null;
+            /** Region */
+            region: string | null;
+            /** Deadline */
+            deadline: string | null;
+            /** Reference Url */
+            reference_url: string | null;
+            /** Created At */
+            created_at: string;
+            current_user_state?: components["schemas"]["DiscoveryFeedUserState"] | null;
+        };
+        /** DiscoveryFeedResponse */
+        DiscoveryFeedResponse: {
+            /** Items */
+            items: components["schemas"]["DiscoveryFeedItem"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+        };
+        /** DiscoveryFeedUserState */
+        DiscoveryFeedUserState: {
+            /** Seen At */
+            seen_at?: string | null;
+            disposition?: components["schemas"]["DiscoveryDisposition"] | null;
+            /** Disposition At */
+            disposition_at?: string | null;
+        };
         /** DiscoveryItemDetail */
         DiscoveryItemDetail: {
             /**
@@ -631,6 +809,77 @@ export interface components {
          * @enum {string}
          */
         DiscoveryStatus: "active" | "withdrawn";
+        /** DiscoveryUserStateDiscoveryRef */
+        DiscoveryUserStateDiscoveryRef: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string;
+            status: components["schemas"]["DiscoveryStatus"];
+            reference_type: components["schemas"]["DiscoveryReferenceType"];
+        };
+        /** DiscoveryUserStateListItem */
+        DiscoveryUserStateListItem: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            discovery: components["schemas"]["DiscoveryUserStateDiscoveryRef"];
+            user: components["schemas"]["DiscoveryUserStateUserRef"];
+            /** Seen At */
+            seen_at: string | null;
+            disposition: components["schemas"]["DiscoveryDisposition"] | null;
+            /** Disposition At */
+            disposition_at: string | null;
+            /** Created At */
+            created_at: string | null;
+            /** Updated At */
+            updated_at: string | null;
+            linked_submission?: components["schemas"]["LinkedDiscoverySubmission"] | null;
+        };
+        /** DiscoveryUserStateListResponse */
+        DiscoveryUserStateListResponse: {
+            /** Items */
+            items: components["schemas"]["DiscoveryUserStateListItem"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+        };
+        /** DiscoveryUserStateResponse */
+        DiscoveryUserStateResponse: {
+            /**
+             * Discovery Id
+             * Format: uuid
+             */
+            discovery_id: string;
+            /**
+             * User Id
+             * Format: uuid
+             */
+            user_id: string;
+            /** Seen At */
+            seen_at?: string | null;
+            disposition?: components["schemas"]["DiscoveryDisposition"] | null;
+            /** Disposition At */
+            disposition_at?: string | null;
+            /** Updated At */
+            updated_at?: string | null;
+        };
+        /** DiscoveryUserStateUserRef */
+        DiscoveryUserStateUserRef: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Display Name */
+            display_name: string;
+        };
         /** EnterpriseCreate */
         EnterpriseCreate: {
             /** Name */
@@ -947,6 +1196,25 @@ export interface components {
          * @enum {string}
          */
         IntermediaryLevel: "none" | "possible" | "likely" | "unknown";
+        /** LinkedDiscoverySubmission */
+        LinkedDiscoverySubmission: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            status: components["schemas"]["SubmissionStatus"];
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Created At */
+            created_at: string | null;
+            /** Completed At */
+            completed_at: string | null;
+            failure_stage?: components["schemas"]["SubmissionFailureStage"] | null;
+            /** Error Code */
+            error_code?: string | null;
+            /** Error Message */
+            error_message?: string | null;
+        };
         /**
          * MarketingLevel
          * @enum {string}
@@ -1311,6 +1579,11 @@ export interface components {
             status: string;
             result?: components["schemas"]["ContentIntelligenceResult"] | null;
         };
+        /**
+         * SubmissionOriginType
+         * @enum {string}
+         */
+        SubmissionOriginType: "user_input" | "discovery";
         /** SubmissionRecord */
         SubmissionRecord: {
             /**
@@ -1325,6 +1598,9 @@ export interface components {
             input_content: string;
             /** Input Preview */
             input_preview: string;
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Origin Discovery Id */
+            origin_discovery_id: string | null;
             /** Source Id */
             source_id: string | null;
             /** Ingestion Id */
@@ -1347,6 +1623,10 @@ export interface components {
          * @enum {string}
          */
         SubmissionStatus: "pending" | "ingesting" | "analyzing" | "succeeded" | "failed";
+        /** UpdateDiscoveryUserStateRequest */
+        UpdateDiscoveryUserStateRequest: {
+            disposition: components["schemas"]["DiscoveryDisposition"] | null;
+        };
         /** UserActor */
         UserActor: {
             /**
@@ -1373,6 +1653,9 @@ export interface components {
             input_type: components["schemas"]["SubmissionInputType"];
             /** Input Preview */
             input_preview: string;
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Origin Discovery Id */
+            origin_discovery_id: string | null;
             /** Created At */
             created_at: string;
             user: components["schemas"]["UserActor"];
@@ -1410,6 +1693,9 @@ export interface components {
             /** Display Title */
             display_title: string;
             submitted_by: components["schemas"]["UserActor"];
+            origin_type: components["schemas"]["SubmissionOriginType"];
+            /** Origin Discovery Id */
+            origin_discovery_id: string | null;
             /** Source Id */
             source_id: string | null;
             /** Ingestion Id */
@@ -2165,6 +2451,42 @@ export interface operations {
             };
         };
     };
+    list_my_submissions_api_user_submissions_mine_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["SubmissionStatus"] | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserSubmissionListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_submission_api_user_submissions__submission_id__get: {
         parameters: {
             query?: never;
@@ -2271,6 +2593,76 @@ export interface operations {
             };
         };
     };
+    list_discovery_feed_for_current_user_api_discoveries_feed_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryFeedResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_saved_discoveries_for_current_user_api_discoveries_saved_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryFeedResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_discovery_api_discoveries__discovery_id__get: {
         parameters: {
             query?: never;
@@ -2326,6 +2718,185 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DiscoveryItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mark_discovery_seen_for_current_user_api_discoveries__discovery_id__seen_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryUserStateResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    accept_discovery_for_current_user_api_discoveries__discovery_id__accept_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcceptDiscoveryResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_discovery_user_state_for_current_user_api_discoveries__discovery_id__user_state_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryUserStateResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_discovery_user_state_for_current_user_api_discoveries__discovery_id__user_state_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path: {
+                discovery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateDiscoveryUserStateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryUserStateResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_discovery_user_states_api_discovery_user_states_get: {
+        parameters: {
+            query?: {
+                discovery_id?: string | null;
+                user_id?: string | null;
+                disposition?: components["schemas"]["DiscoveryDisposition"] | null;
+                seen?: boolean | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: {
+                /** @description Development-only identity header. Not a production authentication mechanism. */
+                "X-Dev-User-Id"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryUserStateListResponse"];
                 };
             };
             /** @description Validation Error */
