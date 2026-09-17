@@ -1,0 +1,114 @@
+.opportunity-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.opportunity-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.opportunity-filter-count {
+  margin-left: var(--space-2);
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.intelligence-tab[aria-selected='true'] .opportunity-filter-count {
+  color: var(--color-brand);
+}
+
+.opportunity-item__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.opportunity-kind--own_service {
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.opportunity-kind--policy {
+  color: var(--color-info);
+  background: var(--color-info-soft);
+}
+
+.opportunity-kind--vendor_service {
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+}
+
+.opportunity-kind--event {
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+}
+
+.opportunity-shelf-status--ready {
+  color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.opportunity-shelf-status--draft,
+.opportunity-shelf-status--needs_review {
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+}
+
+.opportunity-path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.opportunity-path__step {
+  padding: 0 6px;
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-tag);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+}
+
+.opportunity-path__step--current {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-weight: 500;
+}
+
+.opportunity-section {
+  margin-bottom: var(--space-5);
+}
+
+.opportunity-section__title {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-secondary);
+  font-weight: 600;
+}
+
+.opportunity-section__body {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-secondary);
+  line-height: 1.7;
+}
+
+.opportunity-footnote {
+  margin-top: var(--space-3);
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+  line-height: 1.6;
+}

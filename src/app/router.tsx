@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './layout/AppLayout';
+import { CrawlsPage } from '../pages/CrawlsPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { DiscoveriesPage } from '../pages/DiscoveriesPage';
 import { DiscoveryFeedbackPage } from '../pages/DiscoveryFeedbackPage';
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { path: 'service-cases', element: <ServiceCasesPage /> },
       { path: 'sources', element: <SourcesPage /> },
       { path: 'intelligence-runs', element: <IntelligenceRunsPage /> },
+      { path: 'crawls', element: <CrawlsPage /> },
       { path: 'opportunities', element: <OpportunitiesPage /> },
       { path: 'enterprises', element: <EnterprisesPage /> },
       { path: 'leads', element: <LeadsPage /> },

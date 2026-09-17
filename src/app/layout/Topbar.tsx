@@ -1,18 +1,21 @@
-import { useLocation } from 'react-router-dom';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { useBackendHealth } from '../../hooks/useBackendHealth';
-import { getBreadcrumb } from '../navigation';
+import heroLogo from '../../assets/herologo.png';
 import { BackendStatus } from './BackendStatus';
 import { IdentityStatus } from './IdentityStatus';
 
 export function Topbar() {
-  const location = useLocation();
-  const breadcrumb = getBreadcrumb(location.pathname);
   const { connectionStatus } = useBackendHealth();
 
   return (
     <header className="topbar">
-      <div className="topbar__breadcrumb">{breadcrumb}</div>
+      <div className="topbar__brand">
+        <img
+          className="topbar__logo"
+          src={heroLogo}
+          alt="北辰云空间 · 查查"
+        />
+      </div>
       <div className="topbar__meta">
         <IdentityStatus />
         <div className="topbar__env">

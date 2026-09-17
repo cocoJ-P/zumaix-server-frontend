@@ -1,18 +1,15 @@
-import { EmptyState } from '../components/common/EmptyState';
 import { PageHeader } from '../components/common/PageHeader';
+import { LeadWorkspace } from '../features/leads/LeadWorkspace';
 
 export function LeadsPage() {
   return (
     <>
       <PageHeader
         title="企业线索"
-        description="管理企业成员提交的机会线索与后续服务进展。"
-        status="coming-soon"
+        description="根据企业在发现、提交和办理中的操作行为，归纳意向与可服务信号。"
+        status="development"
       />
-      <EmptyState
-        title="Coming Soon"
-        description="该能力依赖 Backend B9，当前阶段尚未开放。"
-      />
+      <LeadWorkspace />
     </>
   );
 }

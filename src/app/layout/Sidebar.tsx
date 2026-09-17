@@ -1,6 +1,6 @@
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { APP_BRAND, APP_TAGLINE, navigation } from '../navigation';
+import { navigation } from '../navigation';
 
 interface SidebarProps {
   collapsed: boolean;
@@ -13,22 +13,17 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       className={collapsed ? 'sidebar sidebar--collapsed' : 'sidebar'}
       aria-label="应用导航"
     >
-      <div className="sidebar__brand">
-        <div className="sidebar__mark" aria-hidden="true">
-          筑
-        </div>
-        {collapsed ? null : (
-          <div className="sidebar__brand-text">
-            <div className="sidebar__brand-name">{APP_BRAND}</div>
-            <div className="sidebar__brand-tagline">{APP_TAGLINE}</div>
-          </div>
-        )}
-      </div>
-
       <nav className="sidebar__nav" aria-label="主导航">
-        {navigation.map((section) => (
+        {navigation.map((section) => {
+          const showTitle =
+            section.items.length !== 1 ||
+            section.items[0]?.label !== section.title;
+
+          return (
           <div className="nav-section" key={section.title}>
-            <div className="nav-section__title">{section.title}</div>
+            {showTitle ? (
+              <div className="nav-section__title">{section.title}</div>
+            ) : null}
             <ul className="nav-list">
               {section.items.map((item) => {
                 const Icon = item.icon;
@@ -56,7 +51,8 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
               })}
             </ul>
           </div>
-        ))}
+          );
+        })}
       </nav>
 
       <div className="sidebar__footer">

@@ -57,7 +57,8 @@
 
 .submission-item__title {
   font-size: var(--font-size-body);
-  font-weight: 600;
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.02em;
   color: var(--color-text-primary);
   overflow-wrap: anywhere;
 }
@@ -117,7 +118,8 @@
 
 .submission-detail__title {
   font-size: var(--font-size-section);
-  font-weight: 600;
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.02em;
   overflow-wrap: anywhere;
 }
 

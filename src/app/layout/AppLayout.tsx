@@ -29,16 +29,24 @@ export function AppLayout() {
 
   return (
     <div className="app-shell">
-      <Sidebar
-        collapsed={collapsed}
-        onToggle={() => setCollapsed((value) => !value)}
-      />
+      <Topbar />
       <div className="app-shell__body">
-        <Topbar />
-        <main className="app-shell__main">
-          <PageContainer>
-            <Outlet />
-          </PageContainer>
+        <Sidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed((value) => !value)}
+        />
+        <main
+          className={
+            location.pathname === '/'
+              ? 'app-shell__main'
+              : 'app-shell__main app-shell__main--veiled'
+          }
+        >
+          <div className="app-shell__scroller">
+            <PageContainer>
+              <Outlet />
+            </PageContainer>
+          </div>
         </main>
       </div>
     </div>

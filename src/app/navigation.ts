@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   ListTodo,
   MessageSquare,
+  Radar,
   Search,
   Sparkles,
   Wrench,
@@ -28,8 +29,8 @@ export interface NavigationSection {
   items: NavigationItem[];
 }
 
-export const APP_NAME = '筑脉企服';
-export const APP_BRAND = 'ZUMAIX 筑脉';
+export const APP_NAME = '北辰云空间';
+export const APP_BRAND = '北辰云空间';
 export const APP_TAGLINE = '企业服务工作台';
 
 export const navigation: NavigationSection[] = [
@@ -95,6 +96,12 @@ export const navigation: NavigationSection[] = [
     title: '业务对象',
     items: [
       {
+        label: '爬取',
+        path: '/crawls',
+        icon: Radar,
+        status: 'development',
+      },
+      {
         label: '机会库',
         path: '/opportunities',
         icon: BriefcaseBusiness,
@@ -107,10 +114,10 @@ export const navigation: NavigationSection[] = [
         status: 'development',
       },
       {
-        label: '企业线索',
+        label: '企业画像',
         path: '/leads',
         icon: ListTodo,
-        status: 'coming-soon',
+        status: 'development',
       },
     ],
   },

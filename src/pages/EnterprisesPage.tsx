@@ -1,15 +1,15 @@
-import { EmptyState } from '../components/common/EmptyState';
 import { PageHeader } from '../components/common/PageHeader';
+import { EnterpriseWorkspace } from '../features/enterprises/EnterpriseWorkspace';
 
 export function EnterprisesPage() {
   return (
     <>
       <PageHeader
         title="企业"
-        description="查看企业基础信息与企业状态。"
+        description="按产业园查看在园企业。当前覆盖数字要素、机器人与智能会展三个园区。"
         status="development"
       />
-      <EmptyState description="Frontend API 接入将在后续阶段完成。" />
+      <EnterpriseWorkspace />
     </>
   );
 }
